@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Contact — Stackly Expeditions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+<link rel="stylesheet" href="shared.css">
+<style>
+.contact-layout{display:grid;grid-template-columns:1fr 1.3fr;gap:4.5rem;align-items:start;}
+.contact-info h3{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;line-height:1;margin-bottom:1rem;}
+.contact-info>p{color:var(--gray-light);font-size:.92rem;line-height:1.78;margin-bottom:2rem;}
+.cd{display:flex;align-items:flex-start;gap:1.1rem;margin-bottom:1.4rem;}
+.cd-icon{width:44px;height:44px;border-radius:8px;background:rgba(249,115,22,.14);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;transition:background .3s;}
+.cd:hover .cd-icon{background:var(--orange);}
+.cd h4{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gray-light);}
+.cd p{font-size:.9rem;margin-top:.15rem;}
+.cd a{color:var(--white);transition:color .25s;}
+.cd a:hover{color:var(--orange);}
+.office-hours{background:var(--glass);border:1px solid var(--glass-border);border-radius:8px;padding:1.4rem;margin-top:2rem;}
+.oh-title{font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold-light);margin-bottom:1rem;}
+.oh-row{display:flex;justify-content:space-between;font-size:.83rem;padding:.5rem 0;border-bottom:1px solid var(--glass-border);}
+.oh-row:last-child{border-bottom:none;}
+.oh-day{color:var(--gray-light);}
+.oh-time{color:var(--white);font-weight:600;}
+
+/* FORM BOX */
+.form-box{background:var(--glass);border:1px solid var(--glass-border);backdrop-filter:blur(22px);border-radius:14px;padding:2.6rem;}
+.form-box h4{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--gold-light);margin-bottom:1.5rem;}
+.char-count{font-size:.68rem;color:var(--gray-light);text-align:right;margin-top:.2rem;}
+.char-count.warn{color:var(--orange);}
+
+/* FAQ MINI */
+.faq-mini{max-width:100%;}
+.faq-item{border-bottom:1px solid var(--glass-border);}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:1.1rem 0;cursor:pointer;font-size:.9rem;font-weight:500;gap:.8rem;transition:color .25s;}
+.faq-q:hover{color:var(--gold-light);}
+.faq-icon{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--glass-border);display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--orange);transition:transform .3s,background .3s;flex-shrink:0;}
+.faq-item.open .faq-icon{transform:rotate(45deg);background:rgba(249,115,22,.15);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .4s;font-size:.82rem;color:var(--gray-light);line-height:1.75;}
+.faq-item.open .faq-a{max-height:160px;padding-bottom:1.1rem;}
+
+/* MAP EMBED PLACEHOLDER */
+.map-embed{border-radius:10px;overflow:hidden;border:1px solid var(--glass-border);height:280px;background:linear-gradient(135deg,rgba(249,115,22,.06),rgba(10,15,30,.8));display:flex;align-items:center;justify-content:center;margin-top:2rem;position:relative;}
+.map-embed img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.35;}
+.map-embed-label{position:relative;z-index:1;text-align:center;}
+.map-embed-label div{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.1em;color:var(--orange);}
+.map-embed-label p{font-size:.78rem;color:var(--gray-light);margin-top:.3rem;}
+
+/* OFFICES GRID */
+.offices-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:3rem;}
+.office-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:8px;padding:1.5rem;transition:transform .3s,border-color .3s;}
+.office-card:hover{transform:translateY(-5px);border-color:rgba(249,115,22,.35);}
+.oc-flag{font-size:1.8rem;margin-bottom:.6rem;}
+.oc-city{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:.06em;margin-bottom:.2rem;}
+.oc-country{font-size:.68rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--orange);margin-bottom:.7rem;}
+.oc-addr{font-size:.8rem;color:var(--gray-light);line-height:1.65;}
+
+@media(max-width:1100px){.offices-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:768px){.contact-layout{grid-template-columns:1fr;gap:2.5rem;} .offices-grid{grid-template-columns:1fr 1fr;} .form-box{padding:1.8rem;}}
+@media(max-width:540px){.offices-grid{grid-template-columns:1fr;} .form-box{padding:1.4rem;}}
+</style>
+</head>
+<body>
+<!-- <div id="loader"><div class="loader-logo">Stackly</div><div class="loader-bar"><div class="loader-fill"></div></div><div class="loader-text">Connecting…</div></div> -->
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">Stackly</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="destinations.html">Destinations</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+  <div class="nav-right"><button class="nav-login-btn" onclick="window.location.href='login.html'">Login</button><button class="nav-cta" onclick="document.getElementById('contactForm').scrollIntoView({behavior:'smooth'})">Book Now</button></div>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="closeMenu()">Home</a><a href="about.html" onclick="closeMenu()">About</a><a href="services.html" onclick="closeMenu()">Services</a><a href="destinations.html" onclick="closeMenu()">Destinations</a><a href="blog.html" onclick="closeMenu()">Blog</a><a href="contact.html" onclick="closeMenu()">Contact</a>
+  <div class="mob-btns"><button class="nav-login-btn" onclick="window.location.href='login.html'">Login</button><button class="nav-cta" onclick="document.getElementById('contactForm').scrollIntoView({behavior:'smooth'})">Book Now</button></div>
+</div>
+
+<div class="page-hero">
+  <div class="float-deco-wrap-r" data-aos="fade-left" data-aos-delay="300">
+    <div class="float-deco float-deco-r1"><img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=300&q=80" alt="Summit climb"></div>
+    <div class="float-deco float-deco-r2"><img src="https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=300&q=80" alt="River adventure"></div>
+    <div class="float-deco float-deco-r3"><img src="https://images.unsplash.com/photo-1530541930197-ff16ac917b0e?w=300&q=80" alt="Camp expedition"></div>
+  </div>
+  <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1800&q=80')"></div>
+  <div class="page-hero-overlay"></div><div class="page-hero-grid"></div>
+  <div class="page-hero-content">
+    <div class="breadcrumb"><a href="index.html">Home</a><span>/</span><span>Contact</span></div>
+    <div class="page-eyebrow">Let's Talk Expeditions</div>
+    <h1 class="page-h1">Plan Your <em>Dream</em><br>Adventure</h1>
+    <p class="page-sub">Our expedition planning team is available 7 days a week. No query is too ambitious — whether it's Everest or a custom 3-week private route, we'll make it happen.</p>
+  </div>
+</div>
+
+<!-- CONTACT MAIN -->
+<section class="section-pad" style="background:linear-gradient(135deg,var(--navy-mid),rgba(13,110,78,.08));">
+  <div class="contact-layout">
+    <!-- INFO SIDE -->
+    <div data-aos="fade-right">
+      <div class="contact-info">
+        <h3>Let's Build Something <span style="color:var(--orange)">Extraordinary</span></h3>
+        <p>Send us an expedition brief and your dedicated planning specialist will respond within 4 business hours with a tailored proposal, itinerary sketch, and pricing options.</p>
+        <div class="cd"><div class="cd-icon">📍</div><div><h4>Global HQ</h4><p>14 Summit Row, Chamonix-Mont-Blanc, France</p></div></div>
+        <div class="cd"><div class="cd-icon">📞</div><div><h4>Phone</h4><p><a href="./404.html">+33 4 50 53 0000</a></p></div></div>
+        <div class="cd"><div class="cd-icon">✉️</div><div><h4>Email</h4><p><a href="./404.html">expeditions@stacklyadventures.com</a></p></div></div>
+        <div class="cd"><div class="cd-icon">💬</div><div><h4>WhatsApp</h4><p><a href="./404.html">+33 6 12 34 56 78</a></p></div></div>
+        <div class="cd"><div class="cd-icon">⏱</div><div><h4>Response Time</h4><p>Within 4 business hours</p></div></div>
+        <div class="office-hours">
+          <div class="oh-title">Office Hours (CET)</div>
+          <div class="oh-row"><span class="oh-day">Monday – Friday</span><span class="oh-time">08:00 – 19:00</span></div>
+          <div class="oh-row"><span class="oh-day">Saturday</span><span class="oh-time">09:00 – 17:00</span></div>
+          <div class="oh-row"><span class="oh-day">Sunday</span><span class="oh-time">10:00 – 15:00</span></div>
+        </div>
+        <div class="map-embed">
+          <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=800&q=80" alt="map">
+          <div class="map-embed-label"><div>📍 Chamonix, France</div><p>Stackly Global HQ</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORM SIDE -->
+    <div data-aos="fade-left" id="contactForm">
+      <div class="form-box">
+        <h4>Send an Expedition Brief</h4>
+        <div id="formContent">
+          <div class="form-row">
+            <div class="form-group" id="g-fn"><label>First Name *</label><input type="text" id="f-fn" placeholder="James"><span class="field-err">Required.</span></div>
+            <div class="form-group" id="g-ln"><label>Last Name *</label><input type="text" id="f-ln" placeholder="Moran"><span class="field-err">Required.</span></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group" id="g-em"><label>Email *</label><input type="email" id="f-em" placeholder="james@example.com"><span class="field-err">Enter a valid email.</span></div>
+            <div class="form-group" id="g-ph"><label>Phone *</label><input type="tel" id="f-ph" placeholder="+1 555 000 0000"><span class="field-err">Enter a valid phone number.</span></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group" id="g-cn"><label>Country</label><input type="text" id="f-cn" placeholder="USA, UK, Australia…"></div>
+            <div class="form-group" id="g-gs"><label>Group Size</label><select id="f-gs"><option value="">— Select —</option><option>Solo</option><option>2 People</option><option>3–5 People</option><option>6–12 People</option><option>12+</option></select></div>
+          </div>
+          <div class="form-group" id="g-ex"><label>Expedition Interest *</label><select id="f-ex"><option value="">— Select Expedition —</option><option>Everest Base Camp Trek</option><option>Annapurna Circuit</option><option>Patagonia Circuit</option><option>Kilimanjaro Summit</option><option>Serengeti Migration Safari</option><option>Iceland Aurora & Glaciers</option><option>Borneo Jungle Expedition</option><option>Amazon River Kayak</option><option>Custom / Private Expedition</option></select><span class="field-err">Please select an expedition.</span></div>
+          <div class="form-row">
+            <div class="form-group"><label>Preferred Dates</label><input type="text" id="f-dt" placeholder="Oct 2025 – flexible"></div>
+            <div class="form-group"><label>Budget Per Person (USD)</label><select id="f-bd"><option value="">— Approx. Budget —</option><option>Under $1,500</option><option>$1,500 – $3,000</option><option>$3,000 – $6,000</option><option>$6,000+</option></select></div>
+          </div>
+          <div class="form-group" id="g-msg"><label>Tell Us About Your Goals *</label><textarea id="f-msg" placeholder="Fitness level, previous expeditions, specific summits or routes you're dreaming about…" oninput="countChars()" maxlength="1000"></textarea><div class="char-count" id="charCount">0 / 1000</div><span class="field-err">Minimum 20 characters required.</span></div>
+          <div class="form-group"><label style="display:flex;align-items:center;gap:.6rem;font-size:.82rem;text-transform:none;letter-spacing:0;cursor:pointer;"><input type="checkbox" id="f-terms" style="width:auto;border-radius:3px;accent-color:var(--orange);"> I agree to Stackly's <a href="#" style="color:var(--orange)">Privacy Policy</a> and <a href="#" style="color:var(--orange)">Terms of Service</a>.</label><span class="field-err" id="terms-err" style="display:none;">You must accept the terms to continue.</span></div>
+          <button class="form-submit" onclick="submitContact()">Send My Expedition Brief →</button>
+        </div>
+        <div class="form-success" id="formSuccess">
+          <div class="success-icon">✓</div>
+          <h3>Brief Received!</h3>
+          <p>Your expedition brief is with our planning team. We'll respond within 4 business hours with a tailored proposal.</p>
+          <a href="services.html" class="btn-ghost" style="margin-top:1.4rem;justify-content:center;">Browse More Tours</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OFFICES -->
+<section class="section-pad" style="background:var(--navy);">
+  <div class="section-eyebrow">Our Offices</div>
+  <h2 class="section-h2" data-aos="fade-up">Find Us <span style="color:var(--orange)">Around the World</span></h2>
+  <div class="offices-grid">
+    <div class="office-card" data-aos="fade-up" data-aos-delay="50"><div class="oc-flag">🇫🇷</div><div class="oc-city">Chamonix</div><div class="oc-country">France — Global HQ</div><div class="oc-addr">14 Summit Row<br>Chamonix-Mont-Blanc<br>+33 4 50 53 0000</div></div>
+    <div class="office-card" data-aos="fade-up" data-aos-delay="120"><div class="oc-flag">🇳🇵</div><div class="oc-city">Kathmandu</div><div class="oc-country">Nepal — Asia HQ</div><div class="oc-addr">22 Thamel Marg<br>Kathmandu, Nepal<br>+977 1 442 8000</div></div>
+    <div class="office-card" data-aos="fade-up" data-aos-delay="190"><div class="oc-flag">🇹🇿</div><div class="oc-city">Arusha</div><div class="oc-country">Tanzania — Africa HQ</div><div class="oc-addr">Plot 7 Boma Road<br>Arusha, Tanzania<br>+255 27 250 0000</div></div>
+    <div class="office-card" data-aos="fade-up" data-aos-delay="50"><div class="oc-flag">🇨🇱</div><div class="oc-city">Puerto Natales</div><div class="oc-country">Chile — South America</div><div class="oc-addr">Av. Balmaceda 123<br>Puerto Natales<br>+56 61 241 0000</div></div>
+    <div class="office-card" data-aos="fade-up" data-aos-delay="120"><div class="oc-flag">🇮🇸</div><div class="oc-city">Reykjavik</div><div class="oc-country">Iceland — Arctic</div><div class="oc-addr">12 Laugavegur<br>101 Reykjavik<br>+354 540 0000</div></div>
+    <div class="office-card" data-aos="fade-up" data-aos-delay="190"><div class="oc-flag">🇦🇺</div><div class="oc-city">Sydney</div><div class="oc-country">Australia — Oceania</div><div class="oc-addr">28 Bridge Street<br>Sydney NSW 2000<br>+61 2 9000 0000</div></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section-pad" style="background:var(--navy-mid);">
+  <div class="section-eyebrow">FAQs</div>
+  <h2 class="section-h2" data-aos="fade-up">Common <span style="color:var(--orange)">Questions</span></h2>
+  <div class="faq-mini" style="max-width:760px;margin-top:2.5rem;" data-aos="fade-up" data-aos-delay="80">
+    <div class="faq-item"><div class="faq-q">How quickly will you respond to my enquiry?<span class="faq-icon">+</span></div><div class="faq-a">We respond to all expedition briefs within 4 business hours Monday–Friday, and within 6 hours on weekends. For urgent enquiries, WhatsApp is the fastest channel.</div></div>
+    <div class="faq-item"><div class="faq-q">What happens after I send my brief?<span class="faq-icon">+</span></div><div class="faq-a">Your dedicated expedition planner will review your brief, assess fitness requirements, and send a personalised itinerary proposal with full pricing within one business day.</div></div>
+    <div class="faq-item"><div class="faq-q">How far in advance should I book?<span class="faq-icon">+</span></div><div class="faq-a">Popular expeditions (Everest Base Camp, Serengeti Migration) book out 6–12 months in advance. We recommend enquiring as early as possible, though we sometimes have last-minute availability.</div></div>
+    <div class="faq-item"><div class="faq-q">Can I request a custom or private expedition?<span class="faq-icon">+</span></div><div class="faq-a">Absolutely — private expeditions are among our most popular offerings. Select "Custom / Private Expedition" in the form above and tell us your dream scenario. We'll build it.</div></div>
+    <div class="faq-item"><div class="faq-q">What deposit is required to secure a booking?<span class="faq-icon">+</span></div><div class="faq-a">We require a 25% deposit upon booking confirmation. The balance is due 60 days before departure. We accept bank transfer, credit card, and PayPal.</div></div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div><span class="footer-brand-name">Stackly</span><p class="footer-tagline">Premium adventure expeditions to Earth's most formidable landscapes.</p><div class="footer-social"><a class="social-btn" href="#">𝕏</a><a class="social-btn" href="#">📸</a><a class="social-btn" href="#">▶</a><a class="social-btn" href="#">in</a></div></div>
+    <div class="footer-col"><h4>Quick Links</h4><ul class="footer-links"><li><a href="index.html">→ Home</a></li><li><a href="about.html">→ About</a></li><li><a href="services.html">→ Services</a></li><li><a href="destinations.html">→ Destinations</a></li><li><a href="blog.html">→ Blog</a></li><li><a href="contact.html">→ Contact</a></li></ul></div>
+    <div class="footer-col"><h4>Expeditions</h4><ul class="footer-links"><li><a href="services.html">→ Trekking</a></li><li><a href="services.html">→ Mountaineering</a></li><li><a href="services.html">→ Wildlife Safaris</a></li><li><a href="services.html">→ Water Adventures</a></li><li><a href="services.html">→ Private Expeditions</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul class="footer-links"><li><a href="about.html">→ Our Story</a></li><li><a href="about.html">→ Guide Team</a></li><li><a href="#">→ Conservation</a></li><li><a href="#">→ Careers</a></li><li><a href="login.html">→ Login</a></li></ul></div>
+    <div class="footer-col"><h4>Field Dispatches</h4><p class="nl-desc">Expedition reports and early access to new tours.</p><div class="nl-form"><input class="nl-input" type="email" id="nl-email" placeholder="your@email.com"><button class="nl-btn" onclick="subNewsletter()">→</button></div><div class="nl-msg" id="nl-msg"></div></div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 Stackly Expeditions. All rights reserved.</span><div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a><a href="login.html">Login</a></div></div>
+</footer>
+<button id="scroll-top" onclick="goTop()">↑</button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="shared.js"></script>
+<script>
+AOS.init({duration:700,easing:'ease-out-cubic',once:true,offset:60});
+document.querySelectorAll('.faq-q').forEach(q=>{q.addEventListener('click',()=>{const item=q.parentElement,was=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!was)item.classList.add('open');});});
+function countChars(){const t=document.getElementById('f-msg');const cc=document.getElementById('charCount');const l=t.value.length;cc.textContent=l+' / 1000';cc.classList.toggle('warn',l>900);}
+// Live error clearing
+['f-fn','f-ln','f-em','f-ph','f-ex','f-msg'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('input',()=>{const gid='g-'+id.replace('f-','');setErr(gid,false);});});
+function submitContact(){
+  const fn=document.getElementById('f-fn').value.trim();
+  const ln=document.getElementById('f-ln').value.trim();
+  const em=document.getElementById('f-em').value.trim();
+  const ph=document.getElementById('f-ph').value.trim();
+  const ex=document.getElementById('f-ex').value;
+  const msg=document.getElementById('f-msg').value.trim();
+  const terms=document.getElementById('f-terms').checked;
+  clearErrs(['g-fn','g-ln','g-em','g-ph','g-ex','g-msg']);
+  document.getElementById('terms-err').style.display='none';
+  let ok=true;
+  if(!fn){setErr('g-fn',true);ok=false;}
+  if(!ln){setErr('g-ln',true);ok=false;}
+  if(!isEmail(em)){setErr('g-em',true);ok=false;}
+  if(!isPhone(ph)){setErr('g-ph',true);ok=false;}
+  if(!ex){setErr('g-ex',true);ok=false;}
+  if(msg.length<20){setErr('g-msg',true);ok=false;}
+  if(!terms){document.getElementById('terms-err').style.display='block';ok=false;}
+  if(!ok)return;
+  const btn=document.querySelector('.form-submit');
+  btn.textContent='Sending…';btn.disabled=true;
+  setTimeout(()=>{
+    document.getElementById('formContent').style.display='none';
+    document.getElementById('formSuccess').style.display='block';
+    btn.disabled=false;btn.textContent='Send My Expedition Brief →';
+  },1400);
+}
+</script>
+</body>
+</html>

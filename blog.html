@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Blog — Stackly Expeditions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+<link rel="stylesheet" href="shared.css">
+<style>
+.blog-layout{display:grid;grid-template-columns:1fr 340px;gap:3rem;align-items:start;}
+/* FEATURED POST */
+.featured-post{position:relative;border-radius:10px;overflow:hidden;height:480px;cursor:pointer;display:flex;align-items:flex-end;margin-bottom:3rem;}
+.featured-post img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .65s;}
+.featured-post:hover img{transform:scale(1.04);}
+.featured-post-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,15,30,.95) 0%,rgba(10,15,30,.4) 55%,rgba(10,15,30,.1) 100%);}
+.fp-content{position:relative;z-index:2;padding:2.4rem;}
+.fp-cat{display:inline-block;background:var(--orange);color:#fff;font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:.22rem .65rem;border-radius:2px;margin-bottom:.8rem;}
+.fp-title{font-family:'Playfair Display',serif;font-size:clamp(1.4rem,3.5vw,2.2rem);font-weight:700;line-height:1.25;margin-bottom:.8rem;}
+.fp-meta{display:flex;align-items:center;gap:1.2rem;font-size:.76rem;color:rgba(249,250,251,.6);flex-wrap:wrap;}
+.fp-author-img{width:32px;height:32px;border-radius:50%;object-fit:cover;border:2px solid var(--orange);}
+
+/* BLOG FILTER */
+.blog-cats{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2.5rem;}
+.bc{background:var(--glass);border:1px solid var(--glass-border);color:var(--gray-light);padding:.38rem 1rem;border-radius:40px;font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;transition:all .25s;}
+.bc:hover,.bc.on{background:var(--orange);border-color:var(--orange);color:#fff;}
+
+/* BLOG GRID */
+.blog-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+.bc-card{background:rgba(255,255,255,.03);border:1px solid var(--glass-border);border-radius:8px;overflow:hidden;transition:transform .3s,box-shadow .3s,border-color .3s;cursor:pointer;}
+.bc-card:hover{transform:translateY(-8px);box-shadow:0 24px 50px rgba(0,0,0,.35);border-color:rgba(249,115,22,.25);}
+.bc-img{height:185px;overflow:hidden;position:relative;}
+.bc-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s;display:block;}
+.bc-card:hover .bc-img img{transform:scale(1.07);}
+.bc-cat-lbl{position:absolute;top:.75rem;left:.75rem;background:rgba(10,15,30,.85);backdrop-filter:blur(6px);color:var(--orange);font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.18rem .55rem;border-radius:3px;}
+.bc-body{padding:1.3rem;}
+.bc-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;line-height:1.42;margin-bottom:.55rem;transition:color .3s;}
+.bc-card:hover .bc-title{color:var(--gold-light);}
+.bc-excerpt{font-size:.79rem;color:var(--gray-light);line-height:1.65;margin-bottom:.9rem;}
+.bc-footer{display:flex;justify-content:space-between;align-items:center;font-size:.72rem;color:var(--gray-light);padding-top:.8rem;border-top:1px solid var(--glass-border);}
+.bc-read{color:var(--orange);font-weight:600;letter-spacing:.05em;}
+.bc-read:hover{text-decoration:underline;}
+
+/* SIDEBAR */
+.sidebar{display:flex;flex-direction:column;gap:1.8rem;position:sticky;top:5rem;}
+.sb-box{background:var(--glass);border:1px solid var(--glass-border);border-radius:8px;padding:1.4rem;}
+.sb-title{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.08em;margin-bottom:1.2rem;color:var(--gold-light);}
+.sb-search{display:flex;gap:0;}
+.sb-inp{flex:1;background:rgba(255,255,255,.05);border:1.5px solid var(--glass-border);border-right:none;color:#fff;padding:.6rem 1rem;border-radius:4px 0 0 4px;font-size:.85rem;outline:none;transition:border-color .3s;}
+.sb-inp:focus{border-color:var(--orange);}
+.sb-sbtn{background:var(--orange);border:none;color:#fff;padding:.6rem .9rem;border-radius:0 4px 4px 0;font-size:.9rem;}
+.sb-cats{list-style:none;display:flex;flex-direction:column;gap:.55rem;}
+.sb-cats li{display:flex;justify-content:space-between;align-items:center;padding-bottom:.55rem;border-bottom:1px solid var(--glass-border);}
+.sb-cats li:last-child{border-bottom:none;padding-bottom:0;}
+.sb-cats a{font-size:.84rem;color:var(--gray-light);transition:color .25s;}
+.sb-cats a:hover{color:var(--orange);}
+.sb-cats span{background:rgba(249,115,22,.15);color:var(--orange);font-size:.65rem;font-weight:700;padding:.15rem .5rem;border-radius:3px;}
+.recent-post{display:flex;gap:.9rem;margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid var(--glass-border);cursor:pointer;transition:opacity .25s;}
+.recent-post:hover{opacity:.8;}
+.recent-post:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none;}
+.rp-img{width:60px;height:60px;border-radius:5px;object-fit:cover;flex-shrink:0;}
+.rp-title{font-size:.8rem;font-weight:600;line-height:1.35;margin-bottom:.25rem;}
+.rp-date{font-size:.68rem;color:var(--gray-light);}
+.tag-cloud{display:flex;flex-wrap:wrap;gap:.5rem;}
+.tag-pill{background:var(--glass);border:1px solid var(--glass-border);color:var(--gray-light);padding:.3rem .85rem;border-radius:40px;font-size:.72rem;transition:all .25s;cursor:pointer;}
+.tag-pill:hover{background:var(--orange);border-color:var(--orange);color:#fff;}
+
+/* PAGINATION */
+.pagination{display:flex;gap:.5rem;justify-content:center;margin-top:3rem;flex-wrap:wrap;}
+.pg{width:40px;height:40px;border-radius:50%;background:var(--glass);border:1.5px solid var(--glass-border);color:var(--white);font-size:.82rem;font-weight:600;display:flex;align-items:center;justify-content:center;transition:background .25s,border-color .25s;cursor:pointer;}
+.pg:hover,.pg.active{background:var(--orange);border-color:var(--orange);}
+.pg.dots{border:none;background:transparent;color:var(--gray-light);}
+
+@media(max-width:1100px){.blog-layout{grid-template-columns:1fr;} .sidebar{position:static;} .blog-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:768px){.blog-grid{grid-template-columns:1fr;} .featured-post{height:340px;}}
+@media(max-width:540px){.featured-post{height:280px;} .fp-title{font-size:1.3rem;}}
+</style>
+</head>
+<body>
+<!-- <div id="loader"><div class="loader-logo">Stackly</div><div class="loader-bar"><div class="loader-fill"></div></div><div class="loader-text">Loading field notes…</div></div> -->
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">Stackly</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="destinations.html">Destinations</a></li><li><a href="blog.html" class="active">Blog</a></li><li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right"><button class="nav-login-btn" onclick="window.location.href='login.html'">Login</button><button class="nav-cta" onclick="window.location.href='contact.html'">Book Now</button></div>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="closeMenu()">Home</a><a href="about.html" onclick="closeMenu()">About</a><a href="services.html" onclick="closeMenu()">Services</a><a href="destinations.html" onclick="closeMenu()">Destinations</a><a href="blog.html" onclick="closeMenu()">Blog</a><a href="contact.html" onclick="closeMenu()">Contact</a>
+  <div class="mob-btns"><button class="nav-login-btn" onclick="window.location.href='login.html'">Login</button><button class="nav-cta" onclick="window.location.href='contact.html'">Book Now</button></div>
+</div>
+
+<div class="page-hero">
+  <div class="float-deco-wrap-r" data-aos="fade-left" data-aos-delay="300">
+    <div class="float-deco float-deco-r1"><img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=300&q=80" alt="Summit climb"></div>
+    <div class="float-deco float-deco-r2"><img src="https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=300&q=80" alt="River adventure"></div>
+    <div class="float-deco float-deco-r3"><img src="https://images.unsplash.com/photo-1530541930197-ff16ac917b0e?w=300&q=80" alt="Camp expedition"></div>
+  </div>
+  <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1800&q=80')"></div>
+  <div class="page-hero-overlay"></div><div class="page-hero-grid"></div>
+  <div class="page-hero-content">
+    <div class="breadcrumb"><a href="index.html">Home</a><span>/</span><span>Blog</span></div>
+    <div class="page-eyebrow">Field Notes & Stories</div>
+    <h1 class="page-h1">The Stackly <em>Journal</em></h1>
+    <p class="page-sub">Stories from the mountain. Gear guides written in the field. Conservation dispatches and expedition reports from guides who live this life.</p>
+  </div>
+</div>
+
+<section class="section-pad" style="background:var(--navy);">
+  <!-- FEATURED POST -->
+  <div class="featured-post" data-aos="fade-up">
+    <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=1600&q=80" alt="Featured">
+    <div class="featured-post-ov"></div>
+    <div class="fp-content">
+      <div class="fp-cat">Mountaineering</div>
+      <h2 class="fp-title">Why Everest Base Camp Still Humbles Our Most Experienced Guides After 22 Years</h2>
+     
+    </div>
+  </div>
+
+  <div class="blog-layout">
+    <div>
+      <!-- CATEGORY FILTER -->
+      <div class="blog-cats">
+        <button class="bc on" onclick="filterPosts('all',this)">All</button>
+        <button class="bc" onclick="filterPosts('mountaineering',this)">Mountaineering</button>
+        <button class="bc" onclick="filterPosts('gear',this)">Gear & Kit</button>
+        <button class="bc" onclick="filterPosts('conservation',this)">Conservation</button>
+        <button class="bc" onclick="filterPosts('guide-tips',this)">Guide Tips</button>
+        <button class="bc" onclick="filterPosts('destinations',this)">Destinations</button>
+        <button class="bc" onclick="filterPosts('stories',this)">Stories</button>
+      </div>
+      <div class="blog-grid" id="blogGrid">
+        <div class="bc-card" data-cat="mountaineering" data-aos="fade-up" data-aos-delay="50">
+          <div class="bc-img"><img src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=600&q=80" alt="EBC"><div class="bc-cat-lbl">Mountaineering</div></div>
+          <div class="bc-body"><h3 class="bc-title">The Khumbu Icefall: Why Every Guide Respects It Every Time</h3><p class="bc-excerpt">Forty trips later, the seracs still shift in the night. What we've learned from two decades in the world's most dangerous frozen labyrinth.</p><div class="bc-footer"><span>Jun 14, 2025 · 6 min</span><a class="bc-read" href="#">Read →</a></div></div>
+        </div>
+        <div class="bc-card" data-cat="gear" data-aos="fade-up" data-aos-delay="120">
+          <div class="bc-img"><img src="https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=600&q=80" alt="Gear"><div class="bc-cat-lbl">Gear & Kit</div></div>
+          <div class="bc-body"><h3 class="bc-title">The 14-Piece Kit That Goes on Every Stackly Expedition</h3><p class="bc-excerpt">Non-negotiable items curated over 5,000 expedition days. Some of them will surprise you. None of them are expensive.</p><div class="bc-footer"><span>May 28, 2025 · 9 min</span><a class="bc-read" href="#">Read →</a></div></div>
+        </div>
+        <div class="bc-card" data-cat="conservation" data-aos="fade-up" data-aos-delay="50">
+          <div class="bc-img"><img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=600&q=80" alt="Conservation"><div class="bc-cat-lbl">Conservation</div></div>
+          <div class="bc-body"><h3 class="bc-title">How Our Leave-No-Trace Protocol Restored 4,000 Hectares of Páramo</h3><p class="bc-excerpt">Three years of coordinated effort with local Andean communities, and the satellite images don't lie. It worked.</p><div class="bc-footer"><span>Apr 9, 2025 · 11 min</span><a class="bc-read" href="#">Read →</a></div></div>
+        </div>
+        <div class="bc-card" data-cat="guide-tips" data-aos="fade-up" data-aos-delay="120">
+          <div class="bc-img"><img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&q=80" alt="Altitude"><div class="bc-cat-lbl">Guide Tips</div></div>
+          <div class="bc-body"><h3 class="bc-title">Acclimatisation Secrets: What Our Medical Team Tells Every Client</h3><p class="bc-excerpt">Diamox vs. rest days. Hydration myths. The golden rule of "climb high, sleep low" — and how to actually apply it.</p><div class="bc-footer"><span>Mar 22, 2025 · 7 min</span><a class="bc-read" href="#">Read →</a></div></div>
+        </div>
+        <div class="bc-card" data-cat="destinations" data-aos="fade-up" data-aos-delay="50">
+          <div class="bc-img"><img src="https://images.unsplash.com/photo-1511884642898-4c92249e20b6?w=600&q=80" alt="Patagonia"><div class="bc-cat-lbl">Destinations</div></div>
+          <div class="bc-body"><h3 class="bc-title">Patagonia in June: The Off-Season Secret No One Tells You About</h3><p class="bc-excerpt">You'll have Torres del Paine almost entirely to yourself. The condors are still there. The wind? Even more wild and honest.</p><div class="bc-footer"><span>Feb 14, 2025 · 8 min</span><a class="bc-read" href="#">Read →</a></div></div>
+        </div>
+        <div class="bc-card" data-cat="stories" data-aos="fade-up" data-aos-delay="120">
+          <div class="bc-img"><img src="https://images.unsplash.com/photo-1598135753163-6167c1a1ad65?w=600&q=80" alt="Night Camp"><div class="bc-cat-lbl">Stories</div></div>
+          <div class="bc-body"><h3 class="bc-title">The Night We Camped at 5,100m and What Happened When the Storm Hit</h3><p class="bc-excerpt">A storm on the Khumbu at 5am. No visibility. Three clients. One decision to make. A story about what professional guides are made for.</p><div class="bc-footer"><span>Jan 31, 2025 · 12 min</span><a class="bc-read" href="#">Read →</a></div></div>
+        </div>
+        <div class="bc-card" data-cat="gear" data-aos="fade-up" data-aos-delay="50">
+          <div class="bc-img"><img src="https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600&q=80" alt="Safari"><div class="bc-cat-lbl">Gear & Kit</div></div>
+          <div class="bc-body"><h3 class="bc-title">Safari Photography: The Camera Kit Our Guides Recommend in 2025</h3><p class="bc-excerpt">Mirrorless vs. DSLR. Telephoto lengths. Why the Serengeti light at 6am is unlike anything you've ever photographed.</p><div class="bc-footer"><span>Jan 12, 2025 · 6 min</span><a class="bc-read" href="#">Read →</a></div></div>
+        </div>
+        <div class="bc-card" data-cat="conservation" data-aos="fade-up" data-aos-delay="120">
+          <div class="bc-img"><img src="https://images.unsplash.com/photo-1547234935-80c7145ec969?w=600&q=80" alt="Wildlife"><div class="bc-cat-lbl">Conservation</div></div>
+          <div class="bc-body"><h3 class="bc-title">The Porters Who Carry More Than Your Bag: A Tribute to the Sherpa</h3><p class="bc-excerpt">Behind every successful Himalayan expedition is a network of extraordinary human beings. It's time we told their stories properly.</p><div class="bc-footer"><span>Dec 2, 2024 · 10 min</span><a class="bc-read" href="#">Read →</a></div></div>
+        </div>
+      </div>
+      <p id="noPosts" style="display:none;text-align:center;color:var(--gray-light);padding:3rem 0;">No posts in this category yet.</p>
+      <div class="pagination">
+        <button class="pg active">1</button>
+        <button class="pg">2</button>
+        <button class="pg">3</button>
+        <button class="pg dots">…</button>
+        <button class="pg">8</button>
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" data-aos="fade-left" data-aos-delay="100">
+      <div class="sb-box">
+        <div class="sb-title">Search</div>
+        <div class="sb-search">
+          <input type="text" class="sb-inp" placeholder="Search posts…" id="sbSearch" oninput="sbSearchFn()">
+          <button class="sb-sbtn">🔍</button>
+        </div>
+      </div>
+      <div class="sb-box">
+        <div class="sb-title">Categories</div>
+        <ul class="sb-cats">
+          <li><a href="#">Mountaineering</a><span>14</span></li>
+          <li><a href="#">Gear & Kit</a><span>9</span></li>
+          <li><a href="#">Conservation</a><span>7</span></li>
+          <li><a href="#">Guide Tips</a><span>11</span></li>
+          <li><a href="#">Destinations</a><span>18</span></li>
+          <li><a href="#">Stories</a><span>6</span></li>
+        </ul>
+      </div>
+      <div class="sb-box">
+        <div class="sb-title">Recent Posts</div>
+        <div class="recent-post"><img class="rp-img" src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=120&q=80" alt="r1"><div><div class="rp-title">The Khumbu Icefall: Why Every Guide Respects It</div><div class="rp-date">Jun 14, 2025</div></div></div>
+        <div class="recent-post"><img class="rp-img" src="https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=120&q=80" alt="r2"><div><div class="rp-title">The 14-Piece Kit That Goes on Every Expedition</div><div class="rp-date">May 28, 2025</div></div></div>
+        <div class="recent-post"><img class="rp-img" src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=120&q=80" alt="r3"><div><div class="rp-title">Leave-No-Trace Protocol Restored 4,000 Ha</div><div class="rp-date">Apr 9, 2025</div></div></div>
+        <div class="recent-post"><img class="rp-img" src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=120&q=80" alt="r4"><div><div class="rp-title">Acclimatisation Secrets From Our Medical Team</div><div class="rp-date">Mar 22, 2025</div></div></div>
+      </div>
+      <div class="sb-box">
+        <div class="sb-title">Tags</div>
+        <div class="tag-cloud">
+          <button class="tag-pill">Everest</button><button class="tag-pill">Gear</button><button class="tag-pill">Safety</button><button class="tag-pill">Nepal</button><button class="tag-pill">Wildlife</button><button class="tag-pill">Patagonia</button><button class="tag-pill">Altitude</button><button class="tag-pill">Sherpa</button><button class="tag-pill">Camera</button><button class="tag-pill">Glaciers</button><button class="tag-pill">Aurora</button><button class="tag-pill">Training</button>
+        </div>
+      </div>
+      <div class="sb-box" style="background:linear-gradient(135deg,rgba(249,115,22,.12),rgba(249,115,22,.04));border-color:rgba(249,115,22,.3);">
+        <div class="sb-title">Newsletter</div>
+        <p style="font-size:.82rem;color:var(--gray-light);line-height:1.65;margin-bottom:1rem;">Get new posts direct from base camp — no spam, ever.</p>
+        <div class="nl-form" style="flex-direction:column;gap:.6rem;">
+          <input class="nl-input" type="email" id="nl-email" placeholder="your@email.com" style="border-radius:4px;border-right:1.5px solid var(--glass-border);">
+          <button class="nl-btn" onclick="subNewsletter()" style="border-radius:4px;width:100%;padding:.7rem;">Subscribe →</button>
+        </div>
+        <div class="nl-msg" id="nl-msg"></div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div><span class="footer-brand-name">Stackly</span><p class="footer-tagline">Premium adventure expeditions to Earth's most formidable landscapes.</p><div class="footer-social"><a class="social-btn" href="#">𝕏</a><a class="social-btn" href="#">📸</a><a class="social-btn" href="#">▶</a><a class="social-btn" href="#">in</a></div></div>
+    <div class="footer-col"><h4>Quick Links</h4><ul class="footer-links"><li><a href="index.html">→ Home</a></li><li><a href="about.html">→ About</a></li><li><a href="services.html">→ Services</a></li><li><a href="destinations.html">→ Destinations</a></li><li><a href="blog.html">→ Blog</a></li><li><a href="contact.html">→ Contact</a></li></ul></div>
+    <div class="footer-col"><h4>Expeditions</h4><ul class="footer-links"><li><a href="services.html">→ Trekking</a></li><li><a href="services.html">→ Mountaineering</a></li><li><a href="services.html">→ Wildlife Safaris</a></li><li><a href="services.html">→ Water Adventures</a></li><li><a href="services.html">→ Private Expeditions</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul class="footer-links"><li><a href="about.html">→ Our Story</a></li><li><a href="about.html">→ Guide Team</a></li><li><a href="#">→ Conservation</a></li><li><a href="#">→ Careers</a></li><li><a href="login.html">→ Login</a></li></ul></div>
+    <div class="footer-col"><h4>Field Dispatches</h4><p class="nl-desc">Reports and route previews direct from base camp.</p><div class="nl-form"><input class="nl-input" type="email" id="nl-email2" placeholder="your@email.com"><button class="nl-btn" onclick="subNewsletter()">→</button></div></div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 Stackly Expeditions. All rights reserved.</span><div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a><a href="login.html">Login</a></div></div>
+</footer>
+<button id="scroll-top" onclick="goTop()">↑</button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="shared.js"></script>
+<script>
+AOS.init({duration:700,easing:'ease-out-cubic',once:true,offset:60});
+function filterPosts(cat,btn){
+  document.querySelectorAll('.bc').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  let any=false;
+  document.querySelectorAll('.bc-card').forEach(card=>{
+    const c=card.dataset.cat||'';
+    const show=cat==='all'||c===cat;
+    card.style.display=show?'':'none';
+    if(show)any=true;
+  });
+  document.getElementById('noPosts').style.display=any?'none':'block';
+}
+function sbSearchFn(){
+  const q=document.getElementById('sbSearch').value.toLowerCase();
+  let any=false;
+  document.querySelectorAll('.bc-card').forEach(card=>{
+    const t=card.querySelector('.bc-title').textContent.toLowerCase();
+    const show=!q||t.includes(q);
+    card.style.display=show?'':'none';
+    if(show)any=true;
+  });
+  document.getElementById('noPosts').style.display=any?'none':'block';
+}
+document.querySelectorAll('.pg').forEach(p=>{if(!p.classList.contains('dots'))p.addEventListener('click',function(){document.querySelectorAll('.pg').forEach(x=>x.classList.remove('active'));this.classList.add('active');});});
+</script>
+</body>
+</html>

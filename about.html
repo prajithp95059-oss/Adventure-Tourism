@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>About — Stackly Expeditions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+<link rel="stylesheet" href="shared.css">
+<style>
+/* ABOUT PAGE */
+.about-intro{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+.about-img-wrap{position:relative;border-radius:6px;overflow:hidden;aspect-ratio:4/5;}
+.about-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .7s;}
+.about-img-wrap:hover img{transform:scale(1.04);}
+.about-img-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,15,30,.65) 0%,transparent 50%);pointer-events:none;}
+.about-badge{position:absolute;bottom:1.8rem;right:-1rem;background:var(--orange);color:#fff;padding:1.4rem 1.6rem;font-family:'Bebas Neue',sans-serif;font-size:2.2rem;line-height:1;text-align:center;border-radius:4px;box-shadow:0 16px 44px rgba(249,115,22,.4);}
+.about-badge span{display:block;font-family:'Inter',sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;margin-top:.3rem;}
+.about-text h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,4vw,3.8rem);line-height:1;margin-bottom:1.2rem;}
+.about-text p{color:var(--gray-light);font-size:.92rem;line-height:1.82;margin-bottom:1rem;}
+.feature-row{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1rem;}
+.fi{width:40px;height:40px;min-width:40px;background:rgba(249,115,22,.12);border:1px solid rgba(249,115,22,.3);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:background .3s;}
+.feature-row:hover .fi{background:var(--orange);}
+.ft h4{font-size:.92rem;font-weight:700;margin-bottom:.2rem;}
+.ft p{font-size:.8rem;color:var(--gray-light);line-height:1.6;}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:3rem;max-width:800px;margin:3rem auto 0;}
+.timeline::before{content:'';position:absolute;left:.9rem;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--orange),var(--gold),transparent);}
+.tl-item{position:relative;margin-bottom:2.5rem;}
+.tl-dot{position:absolute;left:-2.1rem;top:.3rem;width:14px;height:14px;border-radius:50%;background:var(--orange);border:2px solid var(--navy);box-shadow:0 0 0 4px rgba(249,115,22,.25);transition:transform .3s;}
+.tl-item:hover .tl-dot{transform:scale(1.4);}
+.tl-year{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--orange);letter-spacing:.1em;margin-bottom:.3rem;}
+.tl-title{font-size:1rem;font-weight:700;margin-bottom:.4rem;}
+.tl-desc{font-size:.84rem;color:var(--gray-light);line-height:1.72;}
+
+/* TEAM */
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:3rem;}
+.team-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:10px;overflow:hidden;transition:transform .35s,box-shadow .35s,border-color .35s;text-align:center;}
+.team-card:hover{transform:translateY(-10px);box-shadow:0 28px 56px rgba(0,0,0,.4);border-color:rgba(249,115,22,.35);}
+.team-img{height:220px;overflow:hidden;position:relative;}
+.team-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
+.team-card:hover .team-img img{transform:scale(1.08);}
+.team-body{padding:1.3rem 1rem 1.5rem;}
+.team-name{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.06em;margin-bottom:.2rem;}
+.team-role{font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--orange);margin-bottom:.6rem;}
+.team-bio{font-size:.78rem;color:var(--gray-light);line-height:1.65;}
+.team-socials{display:flex;justify-content:center;gap:.5rem;margin-top:.9rem;}
+.team-soc{width:30px;height:30px;border-radius:50%;background:var(--glass);border:1px solid var(--glass-border);display:flex;align-items:center;justify-content:center;font-size:.75rem;color:var(--gray-light);transition:background .25s,color .25s,transform .2s;}
+.team-soc:hover{background:var(--orange);color:#fff;transform:translateY(-2px);}
+
+/* STATS BAND */
+.stats-band{background:linear-gradient(135deg,var(--orange),var(--orange-deep));padding:4.5rem 3.5rem;text-align:center;position:relative;overflow:hidden;}
+.stats-band::before{content:'';position:absolute;top:50%;left:50%;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.08) 0%,transparent 65%);transform:translate(-50%,-50%);pointer-events:none;animation:sbPulse 4s ease-in-out infinite;}
+@keyframes sbPulse{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.15)}}
+.stats-inner{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;position:relative;z-index:1;}
+.si{text-align:center;}
+.sn{display:block;font-family:'Bebas Neue',sans-serif;font-size:4rem;color:#fff;line-height:1;}
+.sl{display:block;font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-top:.4rem;}
+
+/* VALUES */
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem;}
+.val-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:8px;padding:2rem 1.6rem;backdrop-filter:blur(12px);transition:transform .3s,border-color .3s,box-shadow .3s;position:relative;overflow:hidden;}
+.val-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(249,115,22,.08),transparent);opacity:0;transition:opacity .3s;}
+.val-card:hover{transform:translateY(-6px);border-color:rgba(249,115,22,.4);box-shadow:0 20px 44px rgba(0,0,0,.3);}
+.val-card:hover::before{opacity:1;}
+.val-num{font-family:'Bebas Neue',sans-serif;font-size:3.5rem;color:rgba(249,115,22,.15);line-height:1;margin-bottom:.5rem;transition:color .3s;}
+.val-card:hover .val-num{color:rgba(249,115,22,.3);}
+.val-title{font-size:1.05rem;font-weight:700;margin-bottom:.6rem;}
+.val-desc{font-size:.83rem;color:var(--gray-light);line-height:1.72;}
+
+/* AWARDS */
+.awards-row{display:flex;gap:1.5rem;margin-top:3rem;flex-wrap:wrap;}
+.award-card{flex:1;min-width:200px;background:var(--glass);border:1px solid var(--glass-border);border-radius:8px;padding:1.5rem;display:flex;align-items:center;gap:1rem;transition:transform .3s,border-color .3s;}
+.award-card:hover{transform:translateY(-4px);border-color:rgba(212,160,23,.4);}
+.award-icon{font-size:2.2rem;flex-shrink:0;}
+.award-name{font-size:.9rem;font-weight:700;}
+.award-year{font-size:.72rem;color:var(--orange);margin-top:.15rem;}
+
+/* RESPONSIVE */
+@media(max-width:1100px){.team-grid{grid-template-columns:repeat(2,1fr);} .stats-inner{grid-template-columns:repeat(2,1fr);} .values-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:768px){.about-intro{grid-template-columns:1fr;gap:2.5rem;} .about-img-wrap{aspect-ratio:16/9;} .about-badge{right:.8rem;bottom:.8rem;font-size:1.6rem;padding:1rem 1.2rem;} .team-grid{grid-template-columns:1fr 1fr;} .values-grid{grid-template-columns:1fr;} .timeline{padding-left:2rem;} .awards-row{flex-direction:column;} .stats-band{padding:3rem 1.5rem;}}
+@media(max-width:540px){.team-grid{grid-template-columns:1fr;} .stats-inner{grid-template-columns:1fr 1fr;} .sn{font-size:2.8rem;}}
+@media(max-width:400px){.stats-inner{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">STACKLY</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li><li><a href="about.html" class="active">About</a></li><li><a href="services.html">Services</a></li><li><a href="destinations.html">Destinations</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right"><button class="nav-login-btn" onclick="window.location.href='login.html'">Login</button><button class="nav-cta" onclick="window.location.href='contact.html'">Book Now</button></div>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="closeMenu()">Home</a><a href="about.html" onclick="closeMenu()">About</a><a href="services.html" onclick="closeMenu()">Services</a><a href="destinations.html" onclick="closeMenu()">Destinations</a><a href="blog.html" onclick="closeMenu()">Blog</a><a href="contact.html" onclick="closeMenu()">Contact</a>
+  <div class="mob-btns"><button class="nav-login-btn" onclick="window.location.href='login.html'">Login</button><button class="nav-cta" onclick="window.location.href='contact.html'">Book Now</button></div>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="float-deco-wrap-r" data-aos="fade-left" data-aos-delay="300">
+    <div class="float-deco float-deco-r1"><img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=300&q=80" alt="Summit climb"></div>
+    <div class="float-deco float-deco-r2"><img src="https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=300&q=80" alt="River adventure"></div>
+    <div class="float-deco float-deco-r3"><img src="https://images.unsplash.com/photo-1530541930197-ff16ac917b0e?w=300&q=80" alt="Camp expedition"></div>
+  </div>
+  <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1800&q=80')"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-grid"></div>
+  <div class="page-hero-content">
+    <div class="breadcrumb"><a href="index.html">Home</a><span>/</span><span>About</span></div>
+    <div class="page-eyebrow">Our Story</div>
+    <h1 class="page-h1">Born From <em>Passion</em><br>Built on Trust</h1>
+    <p class="page-sub">Founded in 2003 by summit-obsessed mountaineers, Stackly has grown into the world's most trusted premium adventure operator — 14,000 adventurers later.</p>
+  </div>
+</div>
+
+<!-- ABOUT INTRO -->
+<section class="section-pad" style="background:var(--navy);">
+  <div class="about-intro">
+    <div class="about-img-wrap" data-aos="fade-right">
+      <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=900&q=80" alt="Stackly Expedition">
+      <div class="about-img-overlay"></div>
+      <div class="about-badge">21<span>Years of Excellence</span></div>
+    </div>
+    <div data-aos="fade-left">
+      <div class="about-text">
+        <span class="section-eyebrow">Who We Are</span>
+        <h2>Crafting the World's Most <span style="color:var(--orange)">Extraordinary</span> Adventures</h2>
+        <p>Stackly Expeditions was born on the slopes of Denali in 2003, when two certified mountain guides decided the world deserved better than cookie-cutter adventure travel. We built something different: smaller groups, deeper expertise, obsessive safety standards, and a genuine commitment to leaving every wild place better than we found it.</p>
+        <p>Two decades on, we've guided 14,000 adventurers across 87 destinations on all seven continents. Every expedition is designed from scratch — no templates, no shortcuts, no compromises.</p>
+        <div style="margin-top:1.5rem;display:flex;flex-direction:column;gap:.9rem;">
+          <div class="feature-row"><div class="fi">🛡</div><div class="ft"><h4>UIAGM-Certified Safety</h4><p>Two decades of expeditions with zero critical incidents across all programmes.</p></div></div>
+          <div class="feature-row"><div class="fi">🌿</div><div class="ft"><h4>Carbon-Neutral Since 2021</h4><p>We fund restoration in every region we operate. Adventure without guilt.</p></div></div>
+          <div class="feature-row"><div class="fi">🧭</div><div class="ft"><h4>Expert Guides Only</h4><p>Every guide holds international certification and at least 5 years of high-altitude experience.</p></div></div>
+        </div>
+        <div style="margin-top:2rem;display:flex;gap:1rem;flex-wrap:wrap;">
+          <a href="contact.html" class="btn-primary">Plan an Expedition</a>
+          <a href="services.html" class="btn-ghost">View Services</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAND -->
+<div class="stats-band">
+  <div class="stats-inner">
+    <div class="si" data-aos="zoom-in"><span class="sn" data-target="14000">0</span><span class="sl">Adventurers Guided</span></div>
+    <div class="si" data-aos="zoom-in" data-aos-delay="80"><span class="sn" data-target="87">0</span><span class="sl">Destinations</span></div>
+    <div class="si" data-aos="zoom-in" data-aos-delay="160"><span class="sn" data-target="320">0</span><span class="sl">Expeditions Completed</span></div>
+    <div class="si" data-aos="zoom-in" data-aos-delay="240"><span class="sn" data-target="21">0</span><span class="sl">Years of Excellence</span></div>
+  </div>
+</div>
+
+<!-- TIMELINE -->
+<section class="section-pad" style="background:var(--navy-mid);">
+  <div class="section-eyebrow text-center" style="justify-content:center">Our Journey</div>
+  <h2 class="section-h2 text-center" data-aos="fade-up">Two Decades of <span style="color:var(--orange)">Adventure</span></h2>
+  <div class="timeline" data-aos="fade-up" data-aos-delay="100">
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2003</div><div class="tl-title">Founded on Denali</div><div class="tl-desc">Two UIAGM-certified guides — Marcus Webb and Priya Sharma — launch Stackly with one Denali expedition and a vision to transform adventure travel.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2007</div><div class="tl-title">Himalayan Expansion</div><div class="tl-desc">Stackly launches its flagship Everest Base Camp programme and Annapurna Circuit tours. First season sells out in 72 hours.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2011</div><div class="tl-title">Africa & Wildlife Safaris</div><div class="tl-desc">We open our Kilimanjaro and Serengeti operations with exclusive campsite agreements and community partnership programmes across Tanzania.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2016</div><div class="tl-title">Patagonia & Polar Routes</div><div class="tl-desc">Torres del Paine and Iceland expeditions launch. Stackly becomes the first adventure operator to offer carbon-offset documentation on every booking.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2021</div><div class="tl-title">Carbon Neutral Declaration</div><div class="tl-desc">Stackly achieves full carbon neutrality across all operations. We plant 10,000 trees annually and fund glacier monitoring research in Nepal.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2025</div><div class="tl-title">14,000 Adventurers & Beyond</div><div class="tl-desc">We celebrate our 14,000th guided adventurer and launch seven new routes across Southeast Asia, the Amazon, and the High Arctic.</div></div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="section-pad" style="background:var(--navy);">
+  <div class="section-eyebrow text-center" style="justify-content:center">The People</div>
+  <h2 class="section-h2 text-center" data-aos="fade-up">Meet Our <span style="color:var(--orange)">Expert</span> Guides</h2>
+  <p class="section-sub text-center" data-aos="fade-up" data-aos-delay="80">Every Stackly guide is internationally certified with minimum 200 summit ascents and 5 years of high-altitude expedition experience.</p>
+  <div class="team-grid">
+    <div class="team-card" data-aos="fade-up" data-aos-delay="50">
+      <div class="team-img"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80" alt="Marcus Webb"></div>
+      <div class="team-body"><div class="team-name">Marcus Webb</div><div class="team-role">Co-Founder & Lead Guide</div><div class="team-bio">UIAGM certified. 22 Everest expeditions. Former British Army Mountain Leader. Specialises in high-altitude acclimatisation.</div><div class="team-socials"><a class="team-soc" href="#">𝕏</a><a class="team-soc" href="#">in</a><a class="team-soc" href="#">📸</a></div></div>
+    </div>
+    <div class="team-card" data-aos="fade-up" data-aos-delay="130">
+      <div class="team-img"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80" alt="Priya Sharma"></div>
+      <div class="team-body"><div class="team-name">Priya Sharma</div><div class="team-role">Co-Founder & Nepal Director</div><div class="team-bio">Born in Kathmandu, IFMGA certified. Speaks Nepali, Tibetan, English. Led 400+ Himalayan expeditions across 20 years.</div><div class="team-socials"><a class="team-soc" href="#">𝕏</a><a class="team-soc" href="#">in</a><a class="team-soc" href="#">📸</a></div></div>
+    </div>
+    <div class="team-card" data-aos="fade-up" data-aos-delay="210">
+      <div class="team-img"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" alt="Diego Reyes"></div>
+      <div class="team-body"><div class="team-name">Diego Reyes</div><div class="team-role">Patagonia & Andes Lead</div><div class="team-bio">Chilean-born climber and photographer. Patagonian specialist with 15 seasons on Torres del Paine and Aconcagua.</div><div class="team-socials"><a class="team-soc" href="#">𝕏</a><a class="team-soc" href="#">in</a><a class="team-soc" href="#">📸</a></div></div>
+    </div>
+    <div class="team-card" data-aos="fade-up" data-aos-delay="290">
+      <div class="team-img"><img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=400&q=80" alt="Amara Osei"></div>
+      <div class="team-body"><div class="team-name">Amara Osei</div><div class="team-role">Africa Operations Lead</div><div class="team-bio">Tanzanian-born guide and wildlife expert. 300+ Kilimanjaro summits. FGASA-certified safari instructor and conservation advocate.</div><div class="team-socials"><a class="team-soc" href="#">𝕏</a><a class="team-soc" href="#">in</a><a class="team-soc" href="#">📸</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="section-pad" style="background:var(--navy-mid);">
+  <div class="section-eyebrow text-center" style="justify-content:center">What Drives Us</div>
+  <h2 class="section-h2 text-center" data-aos="fade-up">Our Core <span style="color:var(--orange)">Values</span></h2>
+  <div class="values-grid">
+    <div class="val-card" data-aos="fade-up" data-aos-delay="50"><div class="val-num">01</div><div class="val-title">Safety Above All</div><div class="val-desc">No summit, no deadline, no client pressure will ever override our safety protocols. We turn back when the mountain demands it — without hesitation.</div></div>
+    <div class="val-card" data-aos="fade-up" data-aos-delay="120"><div class="val-num">02</div><div class="val-title">Radical Authenticity</div><div class="val-desc">We design real expeditions, not tourist experiences. Honest itineraries, transparent difficulty ratings, and zero-inflated success promises.</div></div>
+    <div class="val-card" data-aos="fade-up" data-aos-delay="190"><div class="val-num">03</div><div class="val-title">Leave It Wilder</div><div class="val-desc">Every Stacklyexpedition funds active conservation. We leave every route, camp, and summit cleaner than we found it — always.</div></div>
+    <div class="val-card" data-aos="fade-up" data-aos-delay="260"><div class="val-num">04</div><div class="val-title">Community Partnership</div><div class="val-desc">We hire locally, pay fairly, and invest in the communities whose mountains we are privileged to explore. Responsible tourism is non-negotiable.</div></div>
+    <div class="val-card" data-aos="fade-up" data-aos-delay="330"><div class="val-num">05</div><div class="val-title">Lifelong Learning</div><div class="val-desc">All guides complete 40+ hours of annual training. We study changing weather patterns, medical advances, and new route conditions obsessively.</div></div>
+    <div class="val-card" data-aos="fade-up" data-aos-delay="400"><div class="val-num">06</div><div class="val-title">Transformative Experience</div><div class="val-desc">We measure success not just in summits reached, but in perspectives shifted. Every Stackly expedition is designed to change how you see the world.</div></div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section class="section-pad" style="background:var(--navy);">
+  <div class="section-eyebrow text-center" style="justify-content:center">Recognition</div>
+  <h2 class="section-h2 text-center" data-aos="fade-up">Awards & <span style="color:var(--orange)">Certifications</span></h2>
+  <div class="awards-row" data-aos="fade-up" data-aos-delay="100">
+    <div class="award-card"><div class="award-icon">🏆</div><div><div class="award-name">World's Best Adventure Operator</div><div class="award-year">National Geographic Traveller · 2024</div></div></div>
+    <div class="award-card"><div class="award-icon">🛡</div><div><div class="award-name">UIAGM Safety Excellence Award</div><div class="award-year">International Mountain Guides Alliance · 2023</div></div></div>
+    <div class="award-card"><div class="award-icon">🌿</div><div><div class="award-name">Responsible Tourism Gold</div><div class="award-year">World Travel Awards · 2024</div></div></div>
+    <div class="award-card"><div class="award-icon">⭐</div><div><div class="award-name">Travellers' Choice — Top 1%</div><div class="award-year">TripAdvisor · 2023 & 2024</div></div></div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div><span class="footer-brand-name">STACKLY</span><p class="footer-tagline">Premium adventure expeditions to Earth's most formidable landscapes. Crafted by experts. Led by passion.</p><div class="footer-social"><a class="social-btn" href="#">𝕏</a><a class="social-btn" href="#">📸</a><a class="social-btn" href="#">▶</a><a class="social-btn" href="#">in</a></div></div>
+    <div class="footer-col"><h4>Quick Links</h4><ul class="footer-links"><li><a href="index.html">→ Home</a></li><li><a href="about.html">→ About</a></li><li><a href="services.html">→ Services</a></li><li><a href="destinations.html">→ Destinations</a></li><li><a href="blog.html">→ Blog</a></li><li><a href="contact.html">→ Contact</a></li></ul></div>
+    <div class="footer-col"><h4>Expeditions</h4><ul class="footer-links"><li><a href="services.html">→ Trekking</a></li><li><a href="services.html">→ Mountaineering</a></li><li><a href="services.html">→ Wildlife Safaris</a></li><li><a href="services.html">→ Water Adventures</a></li><li><a href="services.html">→ Private Expeditions</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul class="footer-links"><li><a href="about.html">→ Our Story</a></li><li><a href="about.html">→ Guide Team</a></li><li><a href="#">→ Conservation</a></li><li><a href="#">→ Careers</a></li><li><a href="login.html">→ Login</a></li></ul></div>
+    <div class="footer-col"><h4>Field Dispatches</h4><p class="nl-desc">Expedition reports, route previews, and early access to new tours — from base camp.</p><div class="nl-form"><input class="nl-input" type="email" id="nl-email" placeholder="your@email.com"><button class="nl-btn" onclick="subNewsletter()">→</button></div><div class="nl-msg" id="nl-msg"></div></div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 Stackly Expeditions. All rights reserved.</span><div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a><a href="login.html">Login</a></div></div>
+</footer>
+<button id="scroll-top" onclick="goTop()">↑</button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="shared.js"></script>
+<script>
+AOS.init({duration:720,easing:'ease-out-cubic',once:true,offset:60});
+function animCount(el,target){let v=0,step=target/80;const t=setInterval(()=>{v+=step;if(v>=target){el.textContent=target>=1000?(target/1000).toFixed(0)+'K+':target+'+';clearInterval(t);return;}el.textContent=Math.floor(v)>=1000?(Math.floor(v)/1000).toFixed(1)+'K':Math.floor(v);},16);}
+const cObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){animCount(e.target,+e.target.dataset.target);cObs.unobserve(e.target);}});},{threshold:.5});
+document.querySelectorAll('[data-target]').forEach(c=>cObs.observe(c));
+</script>
+</body>
+</html>

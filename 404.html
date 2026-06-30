@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>404 — Trail Not Found | Stackly Expeditions</title>
+<meta name="description" content="This trail has gone off the map. Find your way back to Stackly Expeditions.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+<link rel="stylesheet" href="shared.css">
+<style>
+/* ═══ 404 PAGE — TRAIL NOT FOUND ═══ */
+.nf-wrap{min-height:100vh;position:relative;display:flex;align-items:center;justify-content:center;padding:calc(var(--nav-h) + 4rem) 3.5rem 5rem;overflow:hidden;text-align:center;}
+.nf-bg{position:absolute;inset:0;z-index:0;background:linear-gradient(180deg,rgba(8,12,24,.78) 0%,rgba(8,12,24,.88) 55%,var(--navy) 100%),url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=2000&q=80') center/cover no-repeat;animation:nfZoom 24s ease-in-out infinite alternate;}
+@keyframes nfZoom{from{transform:scale(1)}to{transform:scale(1.09)}}
+.nf-grid-overlay{position:absolute;inset:0;z-index:1;background-image:linear-gradient(rgba(251,191,36,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(251,191,36,.05) 1px,transparent 1px);background-size:46px 46px;mask-image:radial-gradient(ellipse at center,#000 0%,transparent 72%);}
+.nf-haze{position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse 60% 50% at 50% 30%,rgba(249,115,22,.14),transparent 70%);}
+
+/* floating tilt expedition photos either side, in front of bg */
+.nf-deco{position:absolute;z-index:2;border-radius:14px;overflow:hidden;box-shadow:0 22px 50px rgba(0,0,0,.5);border:3px solid rgba(251,191,36,.3);pointer-events:none;}
+.nf-deco img{width:100%;height:100%;object-fit:cover;display:block;}
+.nf-deco-4{width:130px;height:170px;top:18%;right:4rem;transform:rotate(9deg);animation:nfFloat2 7s ease-in-out infinite;animation-delay:.3s;}
+.nf-deco-5{width:108px;height:108px;top:62%;right:2.5rem;transform:rotate(-7deg);animation:nfFloat1 6.8s ease-in-out infinite;animation-delay:.9s;}
+@keyframes nfFloat1{0%,100%{transform:translateY(0) rotate(-10deg)}50%{transform:translateY(-18px) rotate(-4deg)}}
+@keyframes nfFloat2{0%,100%{transform:translateY(0) rotate(8deg)}50%{transform:translateY(16px) rotate(14deg)}}
+@keyframes nfFloat3{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-14px) rotate(-10deg)}}
+
+.nf-content{position:relative;z-index:3;max-width:700px;}
+.nf-eyebrow{display:inline-flex;align-items:center;gap:.7rem;font-size:.72rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-light);margin-bottom:1.3rem;animation:fadeUp .8s .1s both;}
+.nf-eyebrow::before,.nf-eyebrow::after{content:'';display:inline-block;width:32px;height:1px;background:var(--gold-light);}
+.nf-code{font-family:'Bebas Neue',sans-serif;font-size:clamp(6.5rem,19vw,12rem);line-height:.82;letter-spacing:.02em;background:linear-gradient(135deg,#fff 0%,#fff 38%,var(--gold-light) 70%,var(--orange) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:fadeUp .9s .2s both;filter:drop-shadow(0 18px 36px rgba(0,0,0,.5));}
+.nf-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.9rem,4.4vw,2.8rem);margin-top:.5rem;letter-spacing:.02em;animation:fadeUp .9s .35s both;}
+.nf-desc{margin-top:1.1rem;font-size:1.02rem;font-weight:300;color:rgba(245,246,251,.74);line-height:1.85;max-width:540px;margin-left:auto;margin-right:auto;animation:fadeUp 1s .5s both;}
+.nf-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2.3rem;animation:fadeUp 1s .65s both;}
+.nf-search{margin:2.5rem auto 0;max-width:440px;display:flex;animation:fadeUp 1s .8s both;}
+.nf-search input{flex:1;background:rgba(255,255,255,.06);backdrop-filter:blur(10px);border:1.5px solid var(--glass-border);border-right:none;color:#fff;padding:.85rem 1.15rem;border-radius:5px 0 0 5px;font-size:.86rem;outline:none;transition:border-color .3s,background .3s;}
+.nf-search input::placeholder{color:rgba(245,246,251,.45);}
+.nf-search input:focus{border-color:var(--gold-light);background:rgba(255,255,255,.1);}
+.nf-search button{background:linear-gradient(135deg,var(--orange),var(--orange-deep));color:#fff;padding:.85rem 1.35rem;border-radius:0 5px 5px 0;font-size:.9rem;font-weight:700;transition:transform .2s;}
+.nf-search button:hover{transform:scale(1.05);}
+.nf-links{margin-top:2.8rem;display:flex;gap:1.7rem;justify-content:center;flex-wrap:wrap;font-size:.78rem;animation:fadeUp 1s .95s both;}
+.nf-links a{color:var(--gray-light);letter-spacing:.06em;text-transform:uppercase;font-weight:600;transition:color .25s,transform .25s;border-bottom:1px solid transparent;padding-bottom:2px;display:inline-block;}
+.nf-links a:hover{color:var(--gold-light);border-color:var(--gold-light);transform:translateY(-2px);}
+
+/* mini stat strip — adds detail/content per request */
+.nf-stats{position:relative;z-index:3;display:flex;gap:0;margin-top:3rem;border:1px solid var(--glass-border);border-radius:8px;overflow:hidden;background:rgba(10,15,30,.55);backdrop-filter:blur(16px);animation:fadeUp 1s 1.1s both;}
+.nf-stat{padding:1.1rem 1.8rem;text-align:center;border-right:1px solid var(--glass-border);}
+.nf-stat:last-child{border-right:none;}
+.nf-stat-num{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--gold-light);letter-spacing:.02em;}
+.nf-stat-label{font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gray-light);margin-top:.2rem;}
+
+/* ── responsive ── */
+@media(max-width:1200px){
+  .nf-deco-4{right:1.5rem;width:112px;height:145px;}
+  .nf-deco-5{right:1rem;width:92px;height:92px;}
+}
+@media(max-width:900px){
+  .nf-deco-4{right:1rem;top:14%;width:96px;height:124px;}
+  .nf-deco-5{right:.8rem;top:64%;width:80px;height:80px;}
+}
+@media(max-width:768px){
+  .nf-wrap{padding:calc(var(--nav-h) + 2.5rem) 1.5rem 3.5rem;}
+  .nf-deco-4,.nf-deco-5{display:none;}
+  .nf-stats{flex-wrap:wrap;}
+  .nf-stat{flex:1 1 50%;padding:.9rem 1rem;}
+  .nf-search{flex-direction:column;}
+  .nf-search input{border-radius:5px;border-right:1.5px solid var(--glass-border);margin-bottom:.6rem;}
+  .nf-search button{border-radius:5px;width:100%;}
+}
+@media(max-width:480px){
+  .nf-code{font-size:clamp(5rem,22vw,7rem);}
+  .nf-title{font-size:clamp(1.5rem,7vw,2rem);}
+  .nf-actions{flex-direction:column;width:100%;}
+  .nf-actions .btn-primary,.nf-actions .btn-ghost{width:100%;justify-content:center;}
+  .nf-links{gap:1rem 1.3rem;font-size:.72rem;}
+}
+@media(max-width:360px){
+  .nf-eyebrow{font-size:.62rem;letter-spacing:.22em;}
+  .nf-stat{flex:1 1 100%;border-right:none;border-bottom:1px solid var(--glass-border);}
+  .nf-stat:last-child{border-bottom:none;}
+}
+
+/* popular content block */
+.nf-popular{position:relative;z-index:3;margin-top:2.6rem;}
+.nf-popular-label{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-light);margin-bottom:1rem;}
+.nf-popular-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+.nf-pop-card{position:relative;display:block;border-radius:10px;overflow:hidden;height:120px;border:1px solid var(--glass-border);transition:transform .3s,box-shadow .3s;}
+.nf-pop-card:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(0,0,0,.4);}
+.nf-pop-card img{width:100%;height:100%;object-fit:cover;filter:brightness(.6);transition:filter .3s,transform .4s;}
+.nf-pop-card:hover img{filter:brightness(.75);transform:scale(1.06);}
+.nf-pop-card span{position:absolute;left:.7rem;bottom:.6rem;font-size:.74rem;font-weight:700;letter-spacing:.03em;color:#fff;}
+@media(max-width:540px){.nf-popular-grid{grid-template-columns:1fr 1fr;} .nf-pop-card{height:100px;}}
+@media(max-width:360px){.nf-popular-grid{grid-template-columns:1fr;} .nf-pop-card{height:90px;}}
+</style>
+</head>
+<body>
+
+
+
+
+<div class="nf-wrap">
+  <div class="nf-bg"></div>
+  <div class="nf-grid-overlay"></div>
+  <div class="nf-haze"></div>
+
+  <div class="nf-deco nf-deco-4" data-aos="fade-left" data-aos-delay="300"><img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=320&q=80" alt="Summit climb"></div>
+  <div class="nf-deco nf-deco-5" data-aos="fade-left" data-aos-delay="500"><img src="https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=320&q=80" alt="River adventure"></div>
+
+  <div class="nf-content">
+    <div class="nf-eyebrow" data-aos="fade-up">Trail Marker Missing</div>
+    <div class="nf-code">404</div>
+    <h1 class="nf-title" data-aos="fade-up" data-aos-delay="120">This Trail Has Gone Off The Map</h1>
+    <p class="nf-desc" data-aos="fade-up" data-aos-delay="180">The page you're looking for doesn't exist, has been rerouted, or never made it past base camp. No need to panic — every expedition hits an unmarked path now and then. Let's get you back to solid ground.</p>
+
+    <div class="nf-actions" data-aos="fade-up" data-aos-delay="240">
+      <a href="javascript:history.back()" class="btn-ghost">← Go Back</a>
+      <a href="index.html" class="btn-primary">Go Home→</a>
+    </div>
+
+    
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="shared.js"></script>
+<script>
+AOS.init({duration:720,easing:'ease-out-cubic',once:true,offset:60});
+</script>
+</body>
+</html>
